@@ -49,7 +49,7 @@ const letter = (i: number) => String.fromCharCode(65 + i)
       <span class="block">{{ slide.block }}</span>
     </header>
 
-    <main class="slide" :class="{ split: isMap }" :key="index">
+    <main class="slide" :class="{ split: isMap || slide.widget === 'az-map' }" :key="index">
       <h1>{{ slide.title }}</h1>
 
       <section v-if="slide.speaker" class="speaker">
@@ -75,6 +75,7 @@ const letter = (i: number) => String.fromCharCode(65 + i)
       <ElasticityWidget v-if="slide.widget === 'elasticity'" />
       <CapexOpexWidget v-else-if="slide.widget === 'capex-opex'" />
       <AzWidget v-else-if="slide.widget === 'az'" />
+      <AzZoom v-else-if="slide.widget === 'az-map'" class="wmap" />
       <WorldMap v-else-if="isMap" :key="slide.widget" class="wmap" :mode="slide.widget!.replace('map-', '') as 'region' | 'edge' | 'choose'" />
 
       <section v-if="slide.quiz" class="quiz">

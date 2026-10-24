@@ -1,4 +1,4 @@
-export type Widget = 'elasticity' | 'capex-opex' | 'az' | 'map-region' | 'map-edge' | 'map-choose'
+export type Widget = 'elasticity' | 'capex-opex' | 'az' | 'az-map' | 'map-region' | 'map-edge' | 'map-choose'
 
 export interface Quiz {
   question: string
@@ -242,7 +242,7 @@ export const SLIDES: Slide[] = [
   },
   {
     block: 'Infraestructura Global',
-    minute: '41–45',
+    minute: '41–43',
     title: 'Zona de Disponibilidad (AZ)',
     points: [
       'Uno o más centros de datos con energía, red y conectividad redundantes',
@@ -253,6 +253,19 @@ export const SLIDES: Slide[] = [
     analogy: 'Varias cocinas separadas dentro de la misma ciudad, cada una con su luz y su agua, unidas por una vía rápida privada.',
     widget: 'az',
     notes: 'Demo: con «Una sola AZ» apaga la AZ donde vive la app → caída. Cambia a «Varias AZ» y apaga una → la app sigue. Esa es la alta disponibilidad.',
+  },
+  {
+    block: 'Infraestructura Global',
+    minute: '43–45',
+    title: 'Las AZ dentro de una Región',
+    points: [
+      'Cada grupo de cuadros es una AZ: uno o más centros de datos',
+      'Separadas por kilómetros: una inundación o un corte no las afecta a todas',
+      'Unidas por fibra privada: tu app puede vivir en varias a la vez',
+    ],
+    analogy: 'En la ciudad (Región), cada cocina (AZ) tiene su propio medidor de luz y de agua.',
+    widget: 'az-map',
+    notes: 'Cambia de Región con los botones y toca cada AZ. Aclara que es un esquema: AWS no publica dónde están sus centros de datos. Puente: el último concepto es Edge Locations.',
   },
   {
     block: 'Infraestructura Global',

@@ -51,9 +51,9 @@ pnpm generate            # sitio estático en deck/.output/public
 | 5–12 | El problema | 5–6 | ¿Alguna vez una web o app se cayó justo cuando más la necesitabas? |
 | 12–25 | Cloud Computing | 7–13 | Quiz Black Friday (A/B/C) · widget de elasticidad |
 | 25–37 | Economía en la nube | 14–18 | ¿Comprar carro o pedir taxi por app? · widget CapEx vs OpEx |
-| 37–50 | Infraestructura Global | 19–23 | ¿Qué Región elegirías para una app en Ecuador? · widget de AZs |
-| 50–55 | Recap | 24–28 | Quiz relámpago de 3 preguntas |
-| 55–60 | Preguntas | 29 | Preguntas acumuladas del chat |
+| 37–50 | Infraestructura Global | 19–24 | ¿Qué Región elegirías para una app en Ecuador? · widget de AZs |
+| 50–55 | Recap | 25–29 | Quiz relámpago de 3 preguntas |
+| 55–60 | Preguntas | 30 | Preguntas acumuladas del chat |
 
 Las respuestas esperadas y el puente al siguiente tema de cada slide están en `notes`, dentro de `deck/app/utils/slides.ts`.
 
@@ -62,7 +62,8 @@ Las respuestas esperadas y el puente al siguiente tema de cada slide están en `
 - **Elasticidad** (slide 9): con capacidad fija, sube el pico y aparecen usuarios sin atender (en rojo); baja la capacidad y crece lo ocioso. Con «Elástica», ambos se acercan a cero.
 - **CapEx vs OpEx** (slide 17): servidores para el pico, uso promedio y plazo. Con uso bajo, OpEx gana claro. Con 100 % de uso y 60 meses, CapEx compite: la nube no es magia, es flexibilidad. Las cifras son ilustrativas.
 - **Zonas de Disponibilidad** (slide 21): con «Una sola AZ», apaga la AZ a y la app se cae. Con «Varias AZ», apaga una y la app sigue en línea.
-- **Mapa mundial** (slides 20, 22 y 23, `deck/app/components/WorldMap.vue`): puntos de las Regiones (toca uno para ver su código, la distancia a Ecuador y sus AZ), las anunciadas en línea punteada y un modo Edge Locations. En la slide 23 lista las 3 Regiones más cercanas a Ecuador. Las slides 20 y 22 hacen zoom a América del Norte; la 23 muestra el mundo para ver Ecuador. El botón «Agrandar» abre el mapa a pantalla casi completa (Esc lo cierra). Las Edge Locations son **ilustrativas** (grandes ciudades), no una lista real. Datos en `deck/app/utils/geo.ts`; la silueta sale de Natural Earth (dominio público) vía `world-atlas`.
+- **AZ dentro de una Región** (slide 22, `deck/app/components/AzZoom.vue`): amplía una Región de Norteamérica y muestra 3 AZ (cada una, un grupo de centros de datos) unidas por fibra. Es un **esquema ilustrativo**: AWS no publica dónde están sus centros de datos.
+- **Mapa mundial** (slides 20, 23 y 24, `deck/app/components/WorldMap.vue`): puntos de las Regiones (toca uno para ver su código, la distancia a Ecuador y sus AZ), las anunciadas en línea punteada y un modo Edge Locations. En la slide 24 lista las 3 Regiones más cercanas a Ecuador. Las slides 20 y 23 hacen zoom a América del Norte; la 24 muestra el mundo para ver Ecuador. La slide 20 solo muestra Regiones; el interruptor de Edge Locations existe solo en la 23. El botón «Agrandar» abre el mapa a pantalla casi completa (Esc lo cierra). Las Edge Locations son **ilustrativas** (grandes ciudades), no una lista real. Datos en `deck/app/utils/geo.ts`; la silueta sale de Natural Earth (dominio público) vía `world-atlas`.
 
 ## Editar la charla
 
