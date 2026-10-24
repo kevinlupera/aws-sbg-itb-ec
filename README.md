@@ -62,7 +62,7 @@ Las respuestas esperadas y el puente al siguiente tema de cada slide están en `
 - **Elasticidad** (slide 9): con capacidad fija, sube el pico y aparecen usuarios sin atender (en rojo); baja la capacidad y crece lo ocioso. Con «Elástica», ambos se acercan a cero.
 - **CapEx vs OpEx** (slide 17): servidores para el pico, uso promedio y plazo. Con uso bajo, OpEx gana claro. Con 100 % de uso y 60 meses, CapEx compite: la nube no es magia, es flexibilidad. Las cifras son ilustrativas.
 - **Zonas de Disponibilidad** (slide 21): con «Una sola AZ», apaga la AZ a y la app se cae. Con «Varias AZ», apaga una y la app sigue en línea.
-- **Mapa mundial** (slides 20, 22 y 23, `deck/app/components/WorldMap.vue`): puntos de las Regiones (toca uno para ver su código, la distancia a Ecuador y sus AZ), las anunciadas en línea punteada y un modo Edge Locations. En la slide 23 lista las 3 Regiones más cercanas a Ecuador. Las Edge Locations son **ilustrativas** (grandes ciudades), no una lista real. Datos en `deck/app/utils/geo.ts`; la silueta sale de Natural Earth (dominio público) vía `world-atlas`.
+- **Mapa mundial** (slides 20, 22 y 23, `deck/app/components/WorldMap.vue`): puntos de las Regiones (toca uno para ver su código, la distancia a Ecuador y sus AZ), las anunciadas en línea punteada y un modo Edge Locations. En la slide 23 lista las 3 Regiones más cercanas a Ecuador. Las slides 20 y 22 hacen zoom a América del Norte; la 23 muestra el mundo para ver Ecuador. El botón «Agrandar» abre el mapa a pantalla casi completa (Esc lo cierra). Las Edge Locations son **ilustrativas** (grandes ciudades), no una lista real. Datos en `deck/app/utils/geo.ts`; la silueta sale de Natural Earth (dominio público) vía `world-atlas`.
 
 ## Editar la charla
 

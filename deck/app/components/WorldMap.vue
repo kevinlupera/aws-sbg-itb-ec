@@ -2,9 +2,23 @@
 // Interactive world map for the Region / Edge Location slides.
 const props = defineProps<{ mode: 'region' | 'edge' | 'choose' }>()
 
+// Region and Edge slides zoom to North America; the "choose" slide keeps the world so Ecuador is visible.
+const zoom = props.mode !== 'choose'
+const tl = project({ name: '', lat: 72, lon: -168 })
+const br = project({ name: '', lat: 12, lon: -52 })
+const view = zoom ? `${tl.x} ${tl.y} ${br.x - tl.x} ${br.y - tl.y}` : `0 0 ${MAP_W} ${MAP_H}`
+// Marks are drawn in map units, so shrink them when zoomed in.
+const k = zoom ? 0.5 : 1
+
+// Enlarged view: the map fills the screen over the slide. Esc closes it.
+const big = ref(false)
+const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') big.value = false }
+onMounted(() => window.addEventListener('keydown', onKey))
+onBeforeUnmount(() => window.removeEventListener('keydown', onKey))
+
 const showEdge = ref(props.mode === 'edge')
 const showRegions = ref(true)
-const selected = ref<string | null>(props.mode === 'region' ? 'sa-east-1' : null)
+const selected = ref<string | null>(props.mode === 'region' ? 'us-east-1' : null)
 
 const sel = computed(() => REGIONS.find(r => r.code === selected.value))
 const eco = project(ECUADOR)
@@ -15,32 +29,33 @@ const pt = (p: Place) => project(p)
 </script>
 
 <template>
-  <div class="map">
+  <div class="map" :class="{ big }">
     <div class="bar">
       <button class="ghost" :aria-pressed="showRegions" @click="showRegions = !showRegions">Regiones ({{ REGIONS.length }})</button>
       <button class="ghost" :aria-pressed="showEdge" @click="showEdge = !showEdge">Edge Locations (ilustrativo)</button>
+      <button class="ghost grow" :aria-pressed="big" @click="big = !big">{{ big ? 'Cerrar (Esc)' : '⤢ Agrandar' }}</button>
     </div>
 
-    <svg :viewBox="`0 0 ${MAP_W} ${MAP_H}`" role="img" aria-label="Mapa mundial con las Regiones de AWS">
+    <svg :viewBox="view" :style="{ '--k': k }" role="img" aria-label="Mapa mundial con las Regiones de AWS">
       <path :d="WORLD_PATH" class="land" />
 
       <g v-if="showEdge">
-        <circle v-for="c in EDGE_CITIES" :key="c.name" :cx="pt(c).x" :cy="pt(c).y" r="3.4" class="edge" />
+        <circle v-for="c in EDGE_CITIES" :key="c.name" :cx="pt(c).x" :cy="pt(c).y" :r="3.4 * k" class="edge" />
       </g>
 
       <g v-if="showRegions">
-        <g v-for="p in PLANNED" :key="p.name">
+        <g v-for="p in zoom ? [] : PLANNED" :key="p.name">
           <circle :cx="pt(p).x" :cy="pt(p).y" r="5" class="planned" />
         </g>
-        <line v-if="sel" :x1="eco.x" :y1="eco.y" :x2="pt(sel).x" :y2="pt(sel).y" class="link" />
+        <line v-if="sel && !zoom" :x1="eco.x" :y1="eco.y" :x2="pt(sel).x" :y2="pt(sel).y" class="link" />
         <g v-for="r in REGIONS" :key="r.code" class="region" :class="{ on: r.code === selected }" @click="selected = r.code">
-          <circle :cx="pt(r).x" :cy="pt(r).y" r="11" class="hit" />
-          <circle :cx="pt(r).x" :cy="pt(r).y" r="5" class="dot" />
+          <circle :cx="pt(r).x" :cy="pt(r).y" :r="11 * k" class="hit" />
+          <circle :cx="pt(r).x" :cy="pt(r).y" :r="5 * k" class="dot" />
           <title>{{ r.name }} · {{ r.code }}</title>
         </g>
       </g>
 
-      <g>
+      <g v-if="!zoom">
         <circle :cx="eco.x" :cy="eco.y" r="4" class="you" />
         <text :x="eco.x + 8" :y="eco.y - 6" class="you-label">Ecuador</text>
       </g>
@@ -74,8 +89,9 @@ const pt = (p: Place) => project(p)
     </div>
 
     <p class="legend">
+      <span v-if="zoom" class="zoom">Zoom: América del Norte</span>
       <span class="k dotk"></span>Región
-      <span class="k plannedk"></span>Anunciada ({{ PLANNED.map(p => p.name).join(', ') }})
+      <span v-if="!zoom"><span class="k plannedk"></span>Anunciada ({{ PLANNED.map(p => p.name).join(', ') }})</span>
       <span v-if="showEdge"><span class="k edgek"></span>Edge Location (ilustrativo)</span>
     </p>
   </div>
@@ -85,15 +101,22 @@ const pt = (p: Place) => project(p)
 .map { display: grid; gap: 0.6rem; padding: 0.9rem; border: 1px solid var(--line); border-radius: 12px; background: var(--panel); }
 .bar { display: flex; gap: 0.5rem; flex-wrap: wrap; }
 .bar button { padding: 0.3rem 0.8rem; font-size: 0.85rem; }
+.grow { margin-left: auto; }
 svg { width: 100%; height: auto; max-height: 34vh; }
+.map.big { position: fixed; inset: 1rem; z-index: 50; overflow: auto; padding: 1.4rem; box-shadow: 0 0 0 100vmax rgba(0, 0, 0, 0.55); }
+.map.big svg { max-height: 68vh; }
+.map.big .title { font-size: 1.3rem; }
+.map.big .sub, .map.big .near { font-size: 1rem; }
+.map.big .zoom { font-family: var(--font-mono); }
+.legend { font-size: 0.9rem; }
 .land { fill: var(--line); }
 .edge { fill: var(--ok); opacity: 0.75; }
 .planned { fill: none; stroke: var(--accent); stroke-width: 1.6; stroke-dasharray: 3 2; }
 .link { stroke: var(--danger); stroke-width: 1.2; stroke-dasharray: 4 3; opacity: 0.8; }
 .region { cursor: pointer; }
 .hit { fill: transparent; }
-.dot { fill: var(--accent); stroke: var(--panel); stroke-width: 1.5; transition: r 0.15s; }
-.region:hover .dot, .region.on .dot { r: 7.5; }
+.dot { fill: var(--accent); stroke: var(--panel); stroke-width: calc(1.5px * var(--k)); transition: r 0.15s; }
+.region:hover .dot, .region.on .dot { r: calc(7.5px * var(--k)); }
 .region.on .dot { stroke: var(--fg); }
 .you { fill: var(--danger); stroke: var(--panel); stroke-width: 1.5; }
 .you-label { fill: var(--danger); font: 700 12px var(--font-body); paint-order: stroke; stroke: var(--panel); stroke-width: 3px; }
