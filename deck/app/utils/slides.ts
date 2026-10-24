@@ -22,11 +22,15 @@ export interface Slide {
   widget?: Widget
   /** Renders the speaker card (photo + bio) from SPEAKER. */
   speaker?: boolean
+  /** Shows the Linktree QR (deck/public/linktree-qr.svg). */
+  qr?: boolean
   /** Speaker notes: expected answers and the bridge to the next slide. */
   notes: string
 }
 
 // Speaker card. Put the photo at deck/public/speaker.jpg (square works best); without it, initials show.
+export const LINKTREE = 'https://linktr.ee/kevinlupera'
+
 export const SPEAKER = {
   name: 'Kevin Lupera',
   role: 'Engineering Manager en Alegra (Colombia)',
@@ -328,6 +332,7 @@ export const SLIDES: Slide[] = [
     block: 'Preguntas',
     minute: '55–60',
     title: '¿Preguntas?',
+    qr: true,
     chat: 'Escribe tu pregunta en el chat',
     notes: 'Lee las preguntas acumuladas en orden. Si no alcanza el tiempo, ofrece responder por LinkedIn.',
   },

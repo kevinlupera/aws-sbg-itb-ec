@@ -86,6 +86,14 @@ const letter = (i: number) => String.fromCharCode(65 + i)
         <button v-else class="ghost" @click="revealed = true">Revelar respuesta (R)</button>
       </section>
 
+      <section v-if="slide.qr" class="qr">
+        <img :src="`${base}linktree-qr.svg`" alt="Código QR de mi Linktree" width="132" height="132" />
+        <div>
+          <p class="qr-title">Escanéame</p>
+          <p class="qr-url">{{ LINKTREE.replace('https://', '') }}</p>
+        </div>
+      </section>
+
       <p v-if="slide.chat" class="chat">💬 <b>Responde en el chat:</b> {{ slide.chat }}</p>
     </main>
 
@@ -151,6 +159,11 @@ h1 {
 .initials { display: grid; place-items: center; background: var(--accent-dim); color: var(--accent); font: 700 4rem var(--font-display); }
 .name { margin: 0; font-size: 1.8rem; font-weight: 700; }
 .role { margin: 0 0 0.6rem; color: var(--accent); font-family: var(--font-mono); font-size: 0.85rem; letter-spacing: 0.1em; text-transform: uppercase; }
+.qr { display: flex; gap: 1.2rem; align-items: center; }
+/* White tile so the code scans in dark mode too. */
+.qr img { border-radius: 10px; border: 1px solid var(--line); background: #fff; }
+.qr-title { margin: 0; font-size: 1.3rem; font-weight: 700; }
+.qr-url { margin: 0; font-family: var(--font-mono); color: var(--accent); }
 .contact { margin: 0.8rem 0 0; font-family: var(--font-mono); font-size: 0.95rem; color: var(--muted-dim); }
 @media (max-width: 640px) { .speaker { flex-direction: column; align-items: flex-start; } }
 
