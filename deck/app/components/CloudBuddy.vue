@@ -27,11 +27,6 @@ const RAIN = [6, 16, 26, 36, 46, 56]
   <div class="track" :class="{ finale }" aria-hidden="true">
     <div class="walker">
       <div class="hop" :class="{ on: hopping }">
-        <svg v-if="talking && !finale" class="chat" viewBox="0 0 28 22" width="28" height="22">
-          <path d="M5 2h18a3 3 0 0 1 3 3v8a3 3 0 0 1-3 3H12l-5 4v-4H5a3 3 0 0 1-3-3V5a3 3 0 0 1 3-3z" />
-          <circle cx="9" cy="9" r="1.4" /><circle cx="14" cy="9" r="1.4" /><circle cx="19" cy="9" r="1.4" />
-        </svg>
-
         <template v-if="finale">
           <svg class="aws" viewBox="0 0 80 52" width="76" height="50">
             <path class="cloud" d="M22 44h38a12 12 0 0 0 1-24a18 18 0 0 0-34-4a12 12 0 0 0-5 28z" />
@@ -44,6 +39,11 @@ const RAIN = [6, 16, 26, 36, 46, 56]
         </template>
 
         <div class="turn">
+          <!-- Inside .turn so it stays over the dog, never over the flames. -->
+          <svg v-if="talking && !finale" class="chat" viewBox="0 0 28 22" width="28" height="22">
+            <path d="M5 2h18a3 3 0 0 1 3 3v8a3 3 0 0 1-3 3H12l-5 4v-4H5a3 3 0 0 1-3-3V5a3 3 0 0 1 3-3z" />
+            <circle cx="9" cy="9" r="1.4" /><circle cx="14" cy="9" r="1.4" /><circle cx="19" cy="9" r="1.4" />
+          </svg>
           <svg viewBox="0 0 150 70" width="150" height="70">
             <!-- Flames chasing from behind. -->
             <g v-for="(f, i) in FLAMES" :key="i" :transform="`translate(${f.x} ${f.y}) scale(${f.s})`">
@@ -89,7 +89,7 @@ const RAIN = [6, 16, 26, 36, 46, 56]
 .walker { width: 150px; animation: walk 48s linear infinite; }
 .hop { position: relative; }
 .hop.on { animation: hop 0.5s ease-out; }
-.turn { animation: turn 48s step-end infinite; }
+.turn { position: relative; animation: turn 48s step-end infinite; }
 
 .fur { fill: #f0a830; stroke: #2b1d0e; stroke-width: 1.6; }
 .ink { fill: #2b1d0e; }
