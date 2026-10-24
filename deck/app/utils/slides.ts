@@ -33,7 +33,7 @@ export const LINKTREE = 'https://linktr.ee/kevinlupera'
 
 export const SPEAKER = {
   name: 'Kevin Lupera',
-  role: 'Engineering Manager en Alegra (Colombia)',
+  role: 'Engineering Manager en Alegra',
   facts: ['AWS Community Builder', 'AWS Certified x4', 'Pueden conocer muchas personas increíbles, aprender y oportunidades :)',  'Me gusta dar compartir experiencias, conocimientos y errores porque le pueden ayudar a alguien más o a su yo más joven!!!'],
   contact: 'LinkedIn · @kevinlupera',
   // Files live in deck/public/certs/.
