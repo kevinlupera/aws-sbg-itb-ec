@@ -96,7 +96,7 @@ const letter = (i: number) => String.fromCharCode(65 + i)
       <section v-if="slide.qr" class="qr">
         <img :src="`${base}linktree-qr.svg`" alt="Código QR de mi Linktree" width="132" height="132" />
         <div>
-          <p class="qr-title">Escanéame</p>
+          <p class="qr-title">Mis redes, slides, blog, charlas y mucho más!!! :)</p>
           <p class="qr-url">{{ LINKTREE.replace('https://', '') }}</p>
         </div>
       </section>
