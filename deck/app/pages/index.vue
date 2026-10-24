@@ -59,6 +59,9 @@ const letter = (i: number) => String.fromCharCode(65 + i)
           <ul class="points"><li v-for="f in SPEAKER.facts" :key="f">{{ f }}</li></ul>
           <p class="contact">{{ SPEAKER.contact }}</p>
         </div>
+        <div class="badges">
+          <img v-for="b in SPEAKER.badges" :key="b.file" :src="`${base}certs/${b.file}`" :alt="b.label" :title="b.label" width="96" height="96" />
+        </div>
       </section>
 
       <ul v-if="slide.points" class="points">
@@ -155,6 +158,7 @@ h1 {
   color: var(--accent);
 }
 .speaker { display: flex; gap: 2.5rem; align-items: center; }
+.badges { display: grid; grid-template-columns: repeat(2, 96px); gap: 0.6rem; margin-left: auto; flex: none; }
 .photo { width: 220px; height: 220px; flex: none; border-radius: 50%; object-fit: cover; border: 4px solid var(--accent); }
 .initials { display: grid; place-items: center; background: var(--accent-dim); color: var(--accent); font: 700 4rem var(--font-display); }
 .name { margin: 0; font-size: 1.8rem; font-weight: 700; }
@@ -165,6 +169,7 @@ h1 {
 .qr-title { margin: 0; font-size: 1.3rem; font-weight: 700; }
 .qr-url { margin: 0; font-family: var(--font-mono); color: var(--accent); }
 .contact { margin: 0.8rem 0 0; font-family: var(--font-mono); font-size: 0.95rem; color: var(--muted-dim); }
+@media (max-width: 900px) { .badges { margin-left: 0; } }
 @media (max-width: 640px) { .speaker { flex-direction: column; align-items: flex-start; } }
 
 .analogy {

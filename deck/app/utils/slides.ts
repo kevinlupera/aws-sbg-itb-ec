@@ -36,6 +36,13 @@ export const SPEAKER = {
   role: 'Engineering Manager en Alegra (Colombia)',
   facts: ['AWS Community Builder', 'AWS Certified x4', 'Pueden conocer muchas personas increíbles, aprender y oportunidades :)',  'Me gusta dar compartir experiencias, conocimientos y errores porque le pueden ayudar a alguien más o a su yo más joven!!!'],
   contact: 'LinkedIn · @kevinlupera',
+  // Files live in deck/public/certs/.
+  badges: [
+    { file: 'cloud-practitioner.png', label: 'AWS Certified Cloud Practitioner' },
+    { file: 'solutions-architect-associate.png', label: 'AWS Certified Solutions Architect – Associate' },
+    { file: 'developer-associate.png', label: 'AWS Certified Developer – Associate' },
+    { file: 'solutions-architect-professional.png', label: 'AWS Certified Solutions Architect – Professional' },
+  ],
 }
 
 // Verified on aws.amazon.com/about-aws/global-infrastructure — update before each event.
