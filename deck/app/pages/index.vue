@@ -76,7 +76,7 @@ const letter = (i: number) => String.fromCharCode(65 + i)
 
     <aside v-if="showNotes" class="notes"><span class="tag">Notas · min {{ slide.minute }}</span>{{ slide.notes }}</aside>
 
-    <CloudBuddy :step="index" :talking="!!slide.chat" />
+    <CloudBuddy :step="index" :talking="!!slide.chat" :finale="index === total - 1" />
 
     <footer class="bottom">
       <button class="ghost" :disabled="index === 0" @click="go(index - 1)" aria-label="Anterior">←</button>
