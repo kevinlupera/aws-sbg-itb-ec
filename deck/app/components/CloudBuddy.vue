@@ -1,8 +1,8 @@
 <script setup lang="ts">
-// Decorative mascot that strolls along the bottom of every slide.
+// Decorative line-art cloud that glides along the bottom of every slide.
 const props = defineProps<{ step: number; talking: boolean }>()
 
-// Small hop on every slide change.
+// Small lift on every slide change.
 const hopping = ref(false)
 let timer: ReturnType<typeof setTimeout> | undefined
 watch(() => props.step, () => {
@@ -18,30 +18,22 @@ onBeforeUnmount(() => clearTimeout(timer))
   <div class="track" aria-hidden="true">
     <div class="walker">
       <div class="hop" :class="{ on: hopping }">
-        <span v-if="talking" class="bubble">💬</span>
+        <svg v-if="talking" class="bubble" viewBox="0 0 28 22" width="28" height="22">
+          <path d="M5 2h18a3 3 0 0 1 3 3v8a3 3 0 0 1-3 3H12l-5 4v-4H5a3 3 0 0 1-3-3V5a3 3 0 0 1 3-3z" />
+          <circle cx="9" cy="9" r="1.4" /><circle cx="14" cy="9" r="1.4" /><circle cx="19" cy="9" r="1.4" />
+        </svg>
         <div class="turn">
-          <svg viewBox="0 0 80 64" width="72" height="58">
-            <g class="bob">
-              <g class="outline">
-                <circle cx="24" cy="34" r="14" />
-                <circle cx="40" cy="25" r="18" />
-                <circle cx="56" cy="34" r="14" />
-                <rect x="10" y="32" width="60" height="20" rx="10" />
-              </g>
-              <g class="fill">
-                <circle cx="24" cy="34" r="14" />
-                <circle cx="40" cy="25" r="18" />
-                <circle cx="56" cy="34" r="14" />
-                <rect x="10" y="32" width="60" height="20" rx="10" />
-              </g>
-              <circle class="cheek" cx="28" cy="42" r="3" />
-              <circle class="cheek" cx="52" cy="42" r="3" />
-              <ellipse class="eye" cx="34" cy="36" rx="2.6" ry="3.4" />
-              <ellipse class="eye" cx="46" cy="36" rx="2.6" ry="3.4" />
-              <path class="smile" d="M36 43 Q40 47 44 43" />
+          <svg viewBox="0 0 80 52" width="80" height="52">
+            <g class="float">
+              <!-- Data packets trailing behind the cloud. -->
+              <rect class="packet p1" x="2" y="33" width="4" height="4" rx="1" />
+              <rect class="packet p2" x="9" y="33" width="4" height="4" rx="1" />
+              <path class="cloud" d="M22 44h38a12 12 0 0 0 1-24a18 18 0 0 0-34-4a12 12 0 0 0-5 28z" />
+              <!-- Activity LEDs, like a server rack. -->
+              <circle class="led l1" cx="34" cy="33" r="2" />
+              <circle class="led l2" cx="42" cy="33" r="2" />
+              <circle class="led l3" cx="50" cy="33" r="2" />
             </g>
-            <ellipse class="foot left" cx="31" cy="58" rx="5" ry="3" />
-            <ellipse class="foot right" cx="49" cy="58" rx="5" ry="3" />
           </svg>
         </div>
       </div>
@@ -51,39 +43,39 @@ onBeforeUnmount(() => clearTimeout(timer))
 
 <style scoped>
 .track { container-type: inline-size; height: 64px; pointer-events: none; }
-.walker { width: 72px; animation: walk 40s linear infinite; }
-.hop { position: relative; }
+.walker { width: 80px; animation: walk 48s linear infinite; }
+.hop { position: relative; padding-top: 12px; }
 .hop.on { animation: hop 0.5s ease-out; }
-.turn { animation: turn 40s step-end infinite; }
+.turn { animation: turn 48s step-end infinite; }
 
-.outline > * { fill: var(--accent); stroke: var(--accent); stroke-width: 5; }
-.fill > * { fill: var(--panel); }
-.cheek { fill: var(--accent); opacity: 0.3; }
-.eye { fill: var(--fg); transform-box: fill-box; transform-origin: center; animation: blink 4s infinite; }
-.smile { fill: none; stroke: var(--fg); stroke-width: 2; stroke-linecap: round; }
-.foot { fill: var(--accent); }
-.foot.left { animation: step 0.6s ease-in-out infinite; }
-.foot.right { animation: step 0.6s ease-in-out infinite reverse; }
-.bob { animation: bob 0.6s ease-in-out infinite; }
+.cloud { fill: var(--panel); stroke: var(--accent); stroke-width: 2.5; stroke-linejoin: round; }
+.led { fill: var(--accent); animation: led 1.8s ease-in-out infinite; }
+.l2 { animation-delay: 0.3s; }
+.l3 { animation-delay: 0.6s; }
+.packet { fill: var(--accent); animation: packet 1.6s linear infinite; }
+.p2 { animation-delay: 0.8s; }
+.float { animation: float 3s ease-in-out infinite; }
 
-.bubble { position: absolute; top: -1.4rem; left: 50%; font-size: 1.3rem; animation: pop 1.6s ease-in-out infinite; }
+.bubble { position: absolute; top: -12px; left: 54px; animation: pop 2s ease-in-out infinite; }
+.bubble path { fill: var(--panel); stroke: var(--accent); stroke-width: 1.5; stroke-linejoin: round; }
+.bubble circle { fill: var(--accent); }
 
-/* Walk the full width of the slide and back, turning around at each edge. */
+/* Glide the full width of the slide and back, turning around at each edge. */
 @keyframes walk {
   0%, 100% { transform: translateX(0); }
-  50% { transform: translateX(calc(100cqw - 72px)); }
+  50% { transform: translateX(calc(100cqw - 80px)); }
 }
 @keyframes turn {
   0% { transform: scaleX(1); }
   50% { transform: scaleX(-1); }
 }
-@keyframes bob { 50% { transform: translateY(-2px); } }
-@keyframes step { 50% { transform: translateY(-2px); } }
-@keyframes blink { 0%, 92%, 100% { transform: scaleY(1); } 96% { transform: scaleY(0.1); } }
-@keyframes hop { 40% { transform: translateY(-14px); } }
-@keyframes pop { 50% { transform: translateY(-3px) scale(1.08); } }
+@keyframes float { 50% { transform: translateY(-2px); } }
+@keyframes led { 0%, 100% { opacity: 0.25; } 40% { opacity: 1; } }
+@keyframes packet { 0% { opacity: 0; transform: translateX(6px); } 30% { opacity: 0.7; } 100% { opacity: 0; transform: translateX(-6px); } }
+@keyframes hop { 40% { transform: translateY(-10px); } }
+@keyframes pop { 50% { transform: translateY(-2px); } }
 
 @media (prefers-reduced-motion: reduce) {
-  .walker, .turn, .bob, .foot, .eye, .bubble, .hop.on { animation: none; }
+  .walker, .turn, .float, .led, .packet, .bubble, .hop.on { animation: none; }
 }
 </style>
