@@ -4,8 +4,8 @@ const props = defineProps<{ mode: 'region' | 'edge' | 'choose' }>()
 
 // Region and Edge slides zoom to North America; the "choose" slide keeps the world so Ecuador is visible.
 const zoom = props.mode !== 'choose'
-const tl = project({ name: '', lat: 72, lon: -168 })
-const br = project({ name: '', lat: 12, lon: -52 })
+const tl = project({ name: '', lat: NA_VIEW.north, lon: NA_VIEW.west })
+const br = project({ name: '', lat: NA_VIEW.south, lon: NA_VIEW.east })
 const view = zoom ? `${tl.x} ${tl.y} ${br.x - tl.x} ${br.y - tl.y}` : `0 0 ${MAP_W} ${MAP_H}`
 // Marks are drawn in map units, so shrink them when zoomed in.
 const k = zoom ? 0.5 : 1
@@ -16,9 +16,8 @@ const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') big.value = false 
 onMounted(() => window.addEventListener('keydown', onKey))
 onBeforeUnmount(() => window.removeEventListener('keydown', onKey))
 
-const inView = (p: Place) => p.lat >= 12 && p.lat <= 72 && p.lon >= -168 && p.lon <= -52
-const naRegions = REGIONS.filter(inView).length
-const naEdge = EDGE_CITIES.filter(inView).length
+const naRegions = REGIONS.filter(inNorthAmerica).length
+const naEdge = EDGE_CITIES.filter(inNorthAmerica).length
 
 const showEdge = ref(props.mode === 'edge')
 const showRegions = ref(true)
@@ -35,8 +34,10 @@ const pt = (p: Place) => project(p)
 <template>
   <div class="map" :class="{ big }">
     <div class="bar">
-      <button class="ghost" :aria-pressed="showRegions" @click="showRegions = !showRegions">Regiones ({{ REGIONS.length }})</button>
-      <button class="ghost" :aria-pressed="showEdge" @click="showEdge = !showEdge">Edge Locations (ilustrativo)</button>
+      <template v-if="mode === 'edge'">
+        <button class="ghost" :aria-pressed="showRegions" @click="showRegions = !showRegions">Regiones ({{ REGIONS.length }})</button>
+        <button class="ghost" :aria-pressed="showEdge" @click="showEdge = !showEdge">Edge Locations (ilustrativo)</button>
+      </template>
       <button class="ghost grow" :aria-pressed="big" @click="big = !big">{{ big ? 'Cerrar (Esc)' : '⤢ Agrandar' }}</button>
     </div>
 

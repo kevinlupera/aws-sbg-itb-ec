@@ -74,6 +74,11 @@ export const EDGE_CITIES: Place[] = [
   ['Santo Domingo', 18.5, -69.9], ['San Juan', 18.5, -66.1], ['Anchorage', 61.2, -149.9], ['Honolulu', 21.3, -157.9],
 ].map(([name, lat, lon]) => ({ name, lat, lon }) as Place)
 
+// Bounds of the North America zoom used by the Region / Edge / AZ slides.
+export const NA_VIEW = { north: 72, south: 12, west: -168, east: -52 }
+export const inNorthAmerica = (p: Place) =>
+  p.lat >= NA_VIEW.south && p.lat <= NA_VIEW.north && p.lon >= NA_VIEW.west && p.lon <= NA_VIEW.east
+
 export const ECUADOR: Place = { name: 'Ecuador (Quito)', lat: -0.2, lon: -78.5 }
 
 // Same projection the land path was generated with: equirectangular, top latitude 80.
