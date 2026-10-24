@@ -1,4 +1,4 @@
-export type Widget = 'elasticity' | 'capex-opex' | 'az'
+export type Widget = 'elasticity' | 'capex-opex' | 'az' | 'map-region' | 'map-edge' | 'map-choose'
 
 export interface Quiz {
   question: string
@@ -237,6 +237,7 @@ export const SLIDES: Slide[] = [
     title: 'Región',
     points: ['Un área geográfica del mundo', 'Contiene varias Zonas de Disponibilidad aisladas entre sí', 'Tus datos se quedan en la Región que tú elijas'],
     analogy: 'Una ciudad donde decides abrir tu negocio: São Paulo, Virginia, Ciudad de México…',
+    widget: 'map-region',
     notes: 'Ejemplos de código: sa-east-1 (São Paulo), us-east-1 (Virginia del Norte), mx-central-1 (México).',
   },
   {
@@ -259,6 +260,7 @@ export const SLIDES: Slide[] = [
     title: 'Edge Locations',
     points: ['Puntos muy cerca de los usuarios finales', 'Guardan copias del contenido (caché)', 'Menos distancia = respuestas más rápidas'],
     analogy: 'Lockers de retiro cerca de tu casa: el pedido ya está ahí y lo recoges en minutos.',
+    widget: 'map-edge',
     notes: 'Hay muchas más Edge Locations que Regiones: por eso llegan a ciudades donde no hay una Región.',
   },
   {
@@ -267,6 +269,7 @@ export const SLIDES: Slide[] = [
     title: '¿Cómo elegir una Región?',
     points: ['Cumplimiento: ¿qué leyes aplican a tus datos?', 'Cercanía: ¿dónde están tus usuarios?', 'Servicios: ¿está disponible lo que necesitas?', 'Precio: varía entre Regiones'],
     chat: 'Si tu app es para usuarios en Ecuador, ¿qué Región elegirías y por qué?',
+    widget: 'map-choose',
     notes: 'No hay Región en Ecuador. Candidatas: São Paulo (cercanía en Sudamérica), Virginia del Norte (más servicios), México. Chile está anunciada. Lo correcto: medir la latencia real desde tus usuarios.',
   },
 

@@ -37,6 +37,8 @@ const base = useRuntimeConfig().app.baseURL
 const photoFailed = ref(false)
 const initials = SPEAKER.name.split(' ').map(w => w[0]).join('').slice(0, 2)
 
+const isMap = computed(() => slide.value.widget?.startsWith('map-') ?? false)
+
 const letter = (i: number) => String.fromCharCode(65 + i)
 </script>
 
@@ -47,7 +49,7 @@ const letter = (i: number) => String.fromCharCode(65 + i)
       <span class="block">{{ slide.block }}</span>
     </header>
 
-    <main class="slide" :key="index">
+    <main class="slide" :class="{ split: isMap }" :key="index">
       <h1>{{ slide.title }}</h1>
 
       <section v-if="slide.speaker" class="speaker">
@@ -73,6 +75,7 @@ const letter = (i: number) => String.fromCharCode(65 + i)
       <ElasticityWidget v-if="slide.widget === 'elasticity'" />
       <CapexOpexWidget v-else-if="slide.widget === 'capex-opex'" />
       <AzWidget v-else-if="slide.widget === 'az'" />
+      <WorldMap v-else-if="isMap" :key="slide.widget" class="wmap" :mode="slide.widget!.replace('map-', '') as 'region' | 'edge' | 'choose'" />
 
       <section v-if="slide.quiz" class="quiz">
         <p class="question">{{ slide.quiz.question }}</p>
@@ -135,6 +138,12 @@ const letter = (i: number) => String.fromCharCode(65 + i)
 }
 
 .slide { flex: 1; display: flex; flex-direction: column; justify-content: center; gap: 1.4rem; animation: in 0.25s ease; }
+/* Map slides: text on the left, map on the right. */
+.slide.split { display: grid; grid-template-columns: 5fr 7fr; column-gap: 2rem; align-content: center; align-items: start; }
+.slide.split > h1 { grid-column: 1 / -1; }
+.slide.split > :not(h1):not(.wmap) { grid-column: 1; }
+.slide.split > .wmap { grid-column: 2; grid-row: 2 / span 5; }
+@media (max-width: 900px) { .slide.split { display: flex; } }
 @keyframes in { from { opacity: 0; transform: translateY(6px); } }
 h1 {
   margin: 0;
