@@ -20,8 +20,18 @@ export interface Slide {
   chat?: string
   quiz?: Quiz
   widget?: Widget
+  /** Renders the speaker card (photo + bio) from SPEAKER. */
+  speaker?: boolean
   /** Speaker notes: expected answers and the bridge to the next slide. */
   notes: string
+}
+
+// Speaker card. Put the photo at deck/public/speaker.jpg (square works best); without it, initials show.
+export const SPEAKER = {
+  name: 'Kevin Lupera',
+  role: 'Engineering Manager en Alegra (Colombia)',
+  facts: ['AWS Community Builder', 'AWS Certified x4', 'Pueden conocer muchas personas increíbles, aprender y oportunidades :)',  'Me gusta dar compartir experiencias, conocimientos y errores porque le pueden ayudar a alguien más o a su yo más joven!!!'],
+  contact: 'LinkedIn · @kevinlupera',
 }
 
 // Verified on aws.amazon.com/about-aws/global-infrastructure — update before each event.
@@ -31,10 +41,17 @@ export const SLIDES: Slide[] = [
   // ── Apertura (0–5) ──────────────────────────────────────────────
   {
     block: 'Apertura',
-    minute: '0–2',
+    minute: '0–1',
     title: 'La nube sin humo: fundamentos de AWS',
     points: ['Qué es la nube, cuánto cuesta y dónde vive físicamente', 'Sin servicios todavía: primero los cimientos'],
     notes: 'Presentación personal en 30 segundos. Promesa: al final podrás explicarle la nube a tu familia con una analogía.',
+  },
+  {
+    block: 'Apertura',
+    minute: '1–2',
+    title: 'Quién soy',
+    speaker: true,
+    notes: 'Presentación en 30 segundos: quién eres, por qué te importa la nube y qué se llevan hoy.',
   },
   {
     block: 'Apertura',

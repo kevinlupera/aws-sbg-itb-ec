@@ -24,7 +24,7 @@ pnpm generate            # sitio estático en deck/.output/public
 | `R` | Revelar la respuesta del quiz |
 | `N` | Mostrar/ocultar notas del speaker |
 
-`?s=N` abre directo la slide N (por ejemplo `/?s=20` es el widget de AZs).
+`?s=N` abre directo la slide N (por ejemplo `/?s=21` es el widget de AZs).
 
 > Las notas (`N`) se ven en pantalla: si compartes esta pestaña, no las abras en vivo. Úsalas para ensayar o ten este README abierto en otra ventana.
 
@@ -47,23 +47,25 @@ pnpm generate            # sitio estático en deck/.output/public
 
 | Min | Bloque | Slides | Pregunta al chat |
 |---|---|---|---|
-| 0–5 | Apertura | 1–3 | ¿Desde qué ciudad nos ves y qué estudias o a qué te dedicas? |
-| 5–12 | El problema | 4–5 | ¿Alguna vez una web o app se cayó justo cuando más la necesitabas? |
-| 12–25 | Cloud Computing | 6–12 | Quiz Black Friday (A/B/C) · widget de elasticidad |
-| 25–37 | Economía en la nube | 13–17 | ¿Comprar carro o pedir taxi por app? · widget CapEx vs OpEx |
-| 37–50 | Infraestructura Global | 18–22 | ¿Qué Región elegirías para una app en Ecuador? · widget de AZs |
-| 50–55 | Recap | 23–27 | Quiz relámpago de 3 preguntas |
-| 55–60 | Preguntas | 28 | Preguntas acumuladas del chat |
+| 0–5 | Apertura | 1–4 | ¿Desde qué ciudad nos ves y qué estudias o a qué te dedicas? |
+| 5–12 | El problema | 5–6 | ¿Alguna vez una web o app se cayó justo cuando más la necesitabas? |
+| 12–25 | Cloud Computing | 7–13 | Quiz Black Friday (A/B/C) · widget de elasticidad |
+| 25–37 | Economía en la nube | 14–18 | ¿Comprar carro o pedir taxi por app? · widget CapEx vs OpEx |
+| 37–50 | Infraestructura Global | 19–23 | ¿Qué Región elegirías para una app en Ecuador? · widget de AZs |
+| 50–55 | Recap | 24–28 | Quiz relámpago de 3 preguntas |
+| 55–60 | Preguntas | 29 | Preguntas acumuladas del chat |
 
 Las respuestas esperadas y el puente al siguiente tema de cada slide están en `notes`, dentro de `deck/app/utils/slides.ts`.
 
 ### Widgets
 
-- **Elasticidad** (slide 8): con capacidad fija, sube el pico y aparecen usuarios sin atender (en rojo); baja la capacidad y crece lo ocioso. Con «Elástica», ambos se acercan a cero.
-- **CapEx vs OpEx** (slide 16): servidores para el pico, uso promedio y plazo. Con uso bajo, OpEx gana claro. Con 100 % de uso y 60 meses, CapEx compite: la nube no es magia, es flexibilidad. Las cifras son ilustrativas.
-- **Zonas de Disponibilidad** (slide 20): con «Una sola AZ», apaga la AZ a y la app se cae. Con «Varias AZ», apaga una y la app sigue en línea.
+- **Elasticidad** (slide 9): con capacidad fija, sube el pico y aparecen usuarios sin atender (en rojo); baja la capacidad y crece lo ocioso. Con «Elástica», ambos se acercan a cero.
+- **CapEx vs OpEx** (slide 17): servidores para el pico, uso promedio y plazo. Con uso bajo, OpEx gana claro. Con 100 % de uso y 60 meses, CapEx compite: la nube no es magia, es flexibilidad. Las cifras son ilustrativas.
+- **Zonas de Disponibilidad** (slide 21): con «Una sola AZ», apaga la AZ a y la app se cae. Con «Varias AZ», apaga una y la app sigue en línea.
 
 ## Editar la charla
+
+Tu foto y datos están en `SPEAKER` (`deck/app/utils/slides.ts`); la foto va en `deck/public/speaker.jpg`.
 
 Todo el contenido vive en `deck/app/utils/slides.ts`: cada slide es un objeto con `title`, `points`, `analogy`, `chat`, `quiz`, `widget` y `notes`. La interfaz solo lo renderiza.
 

@@ -33,6 +33,10 @@ const onKey = (e: KeyboardEvent) => {
 onMounted(() => window.addEventListener('keydown', onKey))
 onBeforeUnmount(() => window.removeEventListener('keydown', onKey))
 
+const base = useRuntimeConfig().app.baseURL
+const photoFailed = ref(false)
+const initials = SPEAKER.name.split(' ').map(w => w[0]).join('').slice(0, 2)
+
 const letter = (i: number) => String.fromCharCode(65 + i)
 </script>
 
@@ -45,6 +49,17 @@ const letter = (i: number) => String.fromCharCode(65 + i)
 
     <main class="slide" :key="index">
       <h1>{{ slide.title }}</h1>
+
+      <section v-if="slide.speaker" class="speaker">
+        <img v-if="!photoFailed" :src="`${base}speaker.jpg`" alt="" class="photo" @error="photoFailed = true" />
+        <span v-else class="photo initials">{{ initials }}</span>
+        <div>
+          <p class="name">{{ SPEAKER.name }}</p>
+          <p class="role">{{ SPEAKER.role }}</p>
+          <ul class="points"><li v-for="f in SPEAKER.facts" :key="f">{{ f }}</li></ul>
+          <p class="contact">{{ SPEAKER.contact }}</p>
+        </div>
+      </section>
 
       <ul v-if="slide.points" class="points">
         <li v-for="p in slide.points" :key="p">{{ p }}</li>
@@ -131,6 +146,14 @@ h1 {
   text-transform: uppercase;
   color: var(--accent);
 }
+.speaker { display: flex; gap: 2.5rem; align-items: center; }
+.photo { width: 220px; height: 220px; flex: none; border-radius: 50%; object-fit: cover; border: 4px solid var(--accent); }
+.initials { display: grid; place-items: center; background: var(--accent-dim); color: var(--accent); font: 700 4rem var(--font-display); }
+.name { margin: 0; font-size: 1.8rem; font-weight: 700; }
+.role { margin: 0 0 0.6rem; color: var(--accent); font-family: var(--font-mono); font-size: 0.85rem; letter-spacing: 0.1em; text-transform: uppercase; }
+.contact { margin: 0.8rem 0 0; font-family: var(--font-mono); font-size: 0.95rem; color: var(--muted-dim); }
+@media (max-width: 640px) { .speaker { flex-direction: column; align-items: flex-start; } }
+
 .analogy {
   margin: 0;
   padding: 1rem 1.25rem;
