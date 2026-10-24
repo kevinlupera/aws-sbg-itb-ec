@@ -16,6 +16,10 @@ const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') big.value = false 
 onMounted(() => window.addEventListener('keydown', onKey))
 onBeforeUnmount(() => window.removeEventListener('keydown', onKey))
 
+const inView = (p: Place) => p.lat >= 12 && p.lat <= 72 && p.lon >= -168 && p.lon <= -52
+const naRegions = REGIONS.filter(inView).length
+const naEdge = EDGE_CITIES.filter(inView).length
+
 const showEdge = ref(props.mode === 'edge')
 const showRegions = ref(true)
 const selected = ref<string | null>(props.mode === 'region' ? 'us-east-1' : null)
@@ -89,7 +93,7 @@ const pt = (p: Place) => project(p)
     </div>
 
     <p class="legend">
-      <span v-if="zoom" class="zoom">Zoom: América del Norte</span>
+      <span v-if="zoom" class="zoom">Zoom: América del Norte · {{ naRegions }} Regiones{{ showEdge ? ` y ${naEdge} Edge Locations de ejemplo` : '' }}</span>
       <span class="k dotk"></span>Región
       <span v-if="!zoom"><span class="k plannedk"></span>Anunciada ({{ PLANNED.map(p => p.name).join(', ') }})</span>
       <span v-if="showEdge"><span class="k edgek"></span>Edge Location (ilustrativo)</span>

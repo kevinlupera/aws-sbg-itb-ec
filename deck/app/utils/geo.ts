@@ -62,6 +62,16 @@ export const EDGE_CITIES: Place[] = [
   ['Osaka', 34.7, 135.5], ['Sídney', -33.9, 151.2], ['Melbourne', -37.8, 145.0], ['Auckland', -36.8, 174.8],
   ['Johannesburgo', -26.2, 28.0], ['Ciudad del Cabo', -33.9, 18.4], ['Lagos', 6.5, 3.4], ['Nairobi', -1.3, 36.8],
   ['El Cairo', 30.0, 31.2], ['Denver', 39.7, -105.0], ['Seattle', 47.6, -122.3], ['Atlanta', 33.7, -84.4],
+  ['Vancouver', 49.3, -123.1], ['Edmonton', 53.5, -113.5], ['Winnipeg', 49.9, -97.1], ['Montreal', 45.5, -73.6],
+  ['Ottawa', 45.4, -75.7], ['Boston', 42.4, -71.1], ['Filadelfia', 40.0, -75.2], ['Washington D. C.', 38.9, -77.0],
+  ['Charlotte', 35.2, -80.8], ['Nashville', 36.2, -86.8], ['Houston', 29.8, -95.4], ['Nueva Orleans', 30.0, -90.1],
+  ['Tampa', 28.0, -82.5], ['Orlando', 28.5, -81.4], ['Kansas City', 39.1, -94.6], ['Mineápolis', 45.0, -93.3],
+  ['San Luis', 38.6, -90.2], ['Detroit', 42.3, -83.0], ['Cleveland', 41.5, -81.7], ['Columbus', 40.0, -83.0],
+  ['Salt Lake City', 40.8, -111.9], ['Phoenix', 33.4, -112.1], ['Las Vegas', 36.2, -115.1], ['San Francisco', 37.8, -122.4],
+  ['San José (EE. UU.)', 37.3, -121.9], ['Portland', 45.5, -122.7], ['San Diego', 32.7, -117.2], ['Albuquerque', 35.1, -106.6],
+  ['Oklahoma City', 35.5, -97.5], ['Austin', 30.3, -97.7], ['Monterrey', 25.7, -100.3], ['Guadalajara', 20.7, -103.3],
+  ['Guatemala', 14.6, -90.5], ['Ciudad de Panamá', 9.0, -79.5], ['San José (Costa Rica)', 9.9, -84.1],
+  ['Santo Domingo', 18.5, -69.9], ['San Juan', 18.5, -66.1], ['Anchorage', 61.2, -149.9], ['Honolulu', 21.3, -157.9],
 ].map(([name, lat, lon]) => ({ name, lat, lon }) as Place)
 
 export const ECUADOR: Place = { name: 'Ecuador (Quito)', lat: -0.2, lon: -78.5 }
