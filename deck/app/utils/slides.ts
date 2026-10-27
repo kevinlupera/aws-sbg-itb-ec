@@ -24,6 +24,8 @@ export interface Slide {
   speaker?: boolean
   /** Shows the Linktree QR (deck/public/linktree-qr.svg). */
   qr?: boolean
+  /** Shows the AWS Student Builder Group logo (deck/public/sbg-itb-logo.png). */
+  logo?: boolean
   /** Speaker notes: expected answers and the bridge to the next slide. */
   notes: string
 }
@@ -54,6 +56,7 @@ export const SLIDES: Slide[] = [
     block: 'Apertura',
     minute: '0–1',
     title: 'La nube sin humo: fundamentos de AWS',
+    logo: true,
     points: ['Qué es la nube, cuánto cuesta y dónde vive físicamente', 'Sin servicios todavía: primero los cimientos'],
     notes: 'Presentación personal en 30 segundos. Promesa: al final podrás explicarle la nube a tu familia con una analogía.',
   },

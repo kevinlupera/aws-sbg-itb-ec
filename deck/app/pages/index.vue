@@ -50,6 +50,7 @@ const letter = (i: number) => String.fromCharCode(65 + i)
     </header>
 
     <main class="slide" :class="{ split: isMap || slide.widget === 'az-map' }" :key="index">
+      <img v-if="slide.logo" class="logo" :src="`${base}sbg-itb-logo.png`" alt="AWS Student Builder Group at ITB" />
       <h1>{{ slide.title }}</h1>
 
       <section v-if="slide.speaker" class="speaker">
@@ -169,6 +170,7 @@ h1 {
 }
 .speaker { display: flex; gap: 2.5rem; align-items: center; }
 .badges { display: grid; grid-template-columns: repeat(2, 96px); gap: 0.6rem; margin-left: auto; flex: none; }
+.logo { width: min(420px, 80%); padding: 0.8rem 1.2rem; border-radius: 12px; background: #0b1120; align-self: flex-start; }
 .photo { width: 220px; height: 220px; flex: none; border-radius: 50%; object-fit: cover; border: 4px solid var(--accent); }
 .initials { display: grid; place-items: center; background: var(--accent-dim); color: var(--accent); font: 700 4rem var(--font-display); }
 .name { margin: 0; font-size: 1.8rem; font-weight: 700; }
