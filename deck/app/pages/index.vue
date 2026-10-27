@@ -47,6 +47,7 @@ const letter = (i: number) => String.fromCharCode(65 + i)
     <header class="top">
       <span class="brand"><span class="mark" aria-hidden="true"></span>Fundamentos de la nube</span>
       <span class="block">{{ slide.block }}</span>
+      <img v-if="!slide.logo" class="top-logo" :src="`${base}sbg-itb-logo.png`" alt="AWS Student Builder Group at ITB" />
     </header>
 
     <main class="slide" :class="{ split: isMap || slide.widget === 'az-map' }" :key="index">
@@ -128,7 +129,9 @@ const letter = (i: number) => String.fromCharCode(65 + i)
   flex-direction: column;
   gap: 1.5rem;
 }
-.top { display: flex; justify-content: space-between; align-items: center; gap: 1rem; font-size: 0.85rem; }
+.top { display: flex; justify-content: space-between; align-items: center; gap: 1rem; font-size: 0.85rem; position: relative; }
+.top-logo { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); height: 1.6rem; padding: 0.25rem 0.5rem; border-radius: 6px; background: #0b1120; opacity: 0.85; }
+@media (max-width: 700px) { .top-logo { display: none; } }
 .brand { display: inline-flex; align-items: center; gap: 0.6rem; font-weight: 600; }
 .mark { width: 0.6rem; height: 0.6rem; border-radius: 50%; background: var(--accent); }
 .block {
