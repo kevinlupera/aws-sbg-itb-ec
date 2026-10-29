@@ -40,7 +40,7 @@ export const SPEAKER = {
     'AWS Community Builder',
     'AWS Certified x4',
     'En las comunidades encuentras personas increíbles, aprendizaje y oportunidades',
-    'Compartir errores en charlas o posts',
+    'Comparte tus errores en charlas y posts: pueden ayudar a alguien más o a tu yo más joven',
   ],
   contact: 'LinkedIn · @kevinlupera',
   // Files live in deck/public/certs/.
