@@ -39,8 +39,7 @@ export const SPEAKER = {
   facts: [
     'AWS Community Builder',
     'AWS Certified x4',
-    'Conozco personas increíbles, aprendo y encuentro oportunidades :)',
-    'Buscar comunidades te puede ayudar',
+    'Conozco personas increíbles, aprendo y encuentro oportunidades, y buscar comunidades te puede ayudar :)',
     'Compartir errores en charlas o posts',
   ],
   contact: 'LinkedIn · @kevinlupera',
